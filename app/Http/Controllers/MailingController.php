@@ -10,8 +10,8 @@ class MailingController extends Controller
 {
     public function getIndex(){
         $view = view("mails.mailing");
-        $view->singedup = implode(",",Pledge::where("status",'=',2)->pluck("email")->all());
-        $view->notsingedup = implode(",",Pledge::whereNotIn("status",[2,3])->pluck("email")->all());
+        $view->singedup = implode(",",Pledge::where("status",'=',2)->where("year",date("Y"))->pluck("email")->all());
+        $view->notsingedup = implode(",",Pledge::whereNotIn("status",[2,3])->where("year",date("Y"))->pluck("email")->all());
 
         return $view;
     }
